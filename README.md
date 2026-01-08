@@ -1,1 +1,0 @@
-# write-up-task-1
