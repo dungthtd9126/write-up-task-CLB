@@ -34,6 +34,20 @@
 - Tại vì khi em chạy trên chall ở task hiện tại thì chương trình có thể bị lỗi j đó khiến nó ko in dữ liệu ra như thường
 -  Và sau khi em thay đổi write_end = write_ptr thì nó mới chịu in ra data như thường
 - Mà file struct cũng có 1 thành phần khá quan trọng tên là vtable
-
 ### Vtable
 - Kiến thức này thì em ko có sử dụng trong chall hiện tại nhưng em tìm hiểu thì thấy có vẻ cx cần thiết trong các chall khó
+<img width="741" height="718" alt="image" src="https://github.com/user-attachments/assets/34f78c6f-62f7-4c97-aac0-1bb836395668" />
+- Đó là ngoài file struct bth sẽ có 1 vùng gọi là vtable
+- Và vùng này mik có thể tạo 1 vtable fake đc
+<img width="1759" height="775" alt="image" src="https://github.com/user-attachments/assets/10373193-81eb-44f0-92c0-11376fffea52" />
+- Lý do là vì tới 1 điểm nào đó thì sẽ có lệnh như hình dưới
+<img width="1766" height="568" alt="image" src="https://github.com/user-attachments/assets/39868f16-7aec-48e1-a173-8996810b96e2" />
+- Nếu như em đã tạo fake vtable và overwrite trước thì sẽ có cơ hội nhảy vô nơi em muốn
+- Nhưng mà đáng tiếc là các bản libc mới thì nó sẽ có cơ chế check vtable có hợp lệ hay ko
+- Do đó sẽ phải thực hiện thêm vài bước để thực sự nhảy vô đc fake vtable
+- Nhưng mà kiến thức này khá sâu và xa nên em tạm bỏ qua, chừng nào gặp thì em sẽ đào thêm
+- Tài liệu mà em tham khảo chủ yếu là pwn college, em sẽ lưu ở dây để tiện các lần sau nếu em cần xem lại wu
+- https://docs.google.com/presentation/d/1Rs04LzYjD4eQ4_TJZCMDJMS8UNcpQ_OXcBpxzKpanC4/edit?slide=id.g205983036a9_0_28#slide=id.g205983036a9_0_28
+- https://pwn.college/software-exploitation/file-struct-exploits
+- Kĩ thuật nâng cao hơn về fsop:
++ https://blog.kylebot.net/2022/10/22/angry-FSROP/#PC2ROP
