@@ -40,14 +40,14 @@
 - Giống như arbitrary read, em cũng cần phải thỏa mãn các điều kiện trên để thực hiện phương pháp này
 - Và đồng thời khi em thỏa mãn các điều kiện trên thì các ptr khác như thế nào cx đc
 
-<img width="1819" height="700" alt="image" src="https://github.com/user-attachments/assets/ec28fdc5-1a97-4545-8e35-af7f9be61692" />
-<img width="1752" height="549" alt="image" src="https://github.com/user-attachments/assets/13605cb0-d404-4347-9fff-8bfb5ed5e1b3" />
+<img width="1319" height="200" alt="image" src="https://github.com/user-attachments/assets/ec28fdc5-1a97-4545-8e35-af7f9be61692" />
+<img width="1252" height="149" alt="image" src="https://github.com/user-attachments/assets/13605cb0-d404-4347-9fff-8bfb5ed5e1b3" />
 
 - Và như hình 1 thì cần phải chú ý read end = write_base
 - Tiếp theo thì chỉ cần quan tâm mỗi write base với write ptr là đc
 - khoảng cách giữa write ptr và base sẽ là vùng mà program in data ra trong lần thực thi 1 hàm in dữ liệu bất kì tiếp theo
 
-<img width="451" height="224" alt="image" src="https://github.com/user-attachments/assets/9450d369-8149-402b-a37c-17f61de3a7e3" />
+<img width="251" height="124" alt="image" src="https://github.com/user-attachments/assets/9450d369-8149-402b-a37c-17f61de3a7e3" />
 
 - Ảnh trên là 1 vd điển hình, nó sẽ in data trong vùng mik đã điều khiển trc r tới data trọng tâm là "Done!"
 - Tuy nhiên, trong 1 số trường hợp thì vùng write_end có thể cũng có sức ảnh hưởng
@@ -80,3 +80,7 @@
 
 - Kĩ thuật nâng cao hơn về fsop:
 + https://blog.kylebot.net/2022/10/22/angry-FSROP/#PC2ROP
+
+## Solve chall
+
+- Chall này idea chính của em là kết hợp uaf + tcache poison + thay đổi file struct của stdout
