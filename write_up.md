@@ -84,3 +84,10 @@
 ## Solve chall
 
 - Chall này idea chính của em là kết hợp uaf + tcache poison + thay đổi file struct của stdout
+- Đầu tiên là uaf:
+- Cách thức để cho ra bug uaf là nhờ vào cơ chế chương trình ko xóa con trỏ pet ở vị trí index mà chỉ xóa size pet thôi
+- Nhờ vào đó, em có thể thực hiện các bước là mua 2 lần với cùng size, sau đó free lần lượt 0 và 1
+- Tiếp theo lại buy lần nữa cùng size
+
+<img width="382" height="141" alt="image" src="https://github.com/user-attachments/assets/ba5e572f-bfb0-41dc-aa30-b8ccfe5a48a3" />
+
