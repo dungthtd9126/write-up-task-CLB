@@ -1,7 +1,7 @@
 # write-up-task-1
 
 ## command note
-s
+
 - check full IO file struct plus of an address or stdin, stdout, stderr:
     - p *((struct _IO_FILE_plus *) addr )
           - addr: stdout, stdin, address of an IO file struct
