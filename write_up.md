@@ -1,12 +1,13 @@
 # write-up-task-1
 
 ## command note
-
+s
 - check full IO file struct plus of an address or stdin, stdout, stderr:
     - p *((struct _IO_FILE_plus *) addr )
-      - addr: stdout, stdin, address of an IO file struct
+          - addr: stdout, stdin, address of an IO file struct
 - check IO file:
-    - p *addr
+    - p *addr2
+         - addr2: stdout, stdin, stderr
 
 ## Kiến thức học được về fsop
 
