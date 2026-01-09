@@ -268,14 +268,54 @@ p.interactive()
 
 - Kế tiếp là tcache poison kết hợp brute force
 <img width="956" height="213" alt="image" src="https://github.com/user-attachments/assets/7ebe2af7-56fe-4c82-be28-84a86c781b69" />
+
 - Đây là mục tiêu của em, tcache poison để cho nó malloc ra vùng stdout
+
 - Để làm đc v thì đầu tiên em sẽ chuẩn bị 1 vùng libc : main arena ở trong heap
+
 - Em có thể làm đc v là nhờ vào việc sau khi free 1 chunk lớn để nó vô unsorted bin thì sẽ có 1 addr main arena thuộc libc đc gán vô chunk lớn đó
+
 - Và sau khi malloc để lấy từ unsorted bin ra thì nó vẫn ko xóa dữ liệu của vùng đó
+
 - Vì thế em sẽ tạo 1 chunk lớn --> free --> malloc lại = size --> có libc trong heap
+
 - Nhờ vào việc này, em chỉ cần thay đổi 2 byte cuối của libc cho nó thành stdout address
+
 - Do tính chất 12 bit cuối ko đổi nên em sẽ brute 4 bit ở bước này
+
 - Tiếp theo là tạo ra 3 chunk cùng size = 100 và 1 chunk dư cuối cùng để lúc free các chunk kia thì nó ko bị gộp chung với top chunk
+
 - Lúc này thì áp dụng cách uaf là sẽ điều khiển đc 1 chunk lúc free
-- em sẽ free cùng lúc 3 chunk đã tạo ở trên
-- 
+
+- em sẽ free cùng lúc 3 chunk đã tạo ở trên, chunk mà em uaf đc thì em sẽ free sau cùng
+
+- Lúc này số lượng addr đc trữ lên tới 3
+
+- Em sẽ tcache poison chunk free sau cùng thành địa chỉ heap chứa libc
+
+- Đây cũng là lúc em phải brute force thêm 4 bit nữa
+
+<img width="991" height="168" alt="image" src="https://github.com/user-attachments/assets/dce28329-cfcc-452a-b5fa-4775c9084541" />
+
+- Nhờ vào đó em sẽ lừa đc chương trình nghĩ stdout addr kia là 1 trong những addr đã free
+
+- Và em chỉ cần malloc 3 lần với cùng size = 100 thì lần thứ 3 sẽ lấy đc stdout và điều khiển đc
+
+#### Ghi đè stdout
+
+- Đây là lúc kiến thức mới đc áp dụng, em sẽ thực hiện 3 bước chính là:
+  
+    - ghi đè write ptr byte cuối thành 0xff --> leak libc
+    - ghi đè từ read ptr tới write ptr --> leak heap
+    - ghi đè read ptr tới write end --> leak flag
+ 
+- Bước đầu thì em sẽ leak libc bằng cách chỉnh libc bên vùng heap thành write ptr của stdout
+
+- Lúc này, chỉ cần đè 1 byte thành 0xff thì tới lệnh in tiếp theo nó sẽ ghi các dữ liệu trong vùng write base và wtr ptr ra, lúc này sẽ leak đc libc
+
+- Tiếp theo thì thực hiện lại các bước uaf + tcache poison để điều khiển đc stdout từ read ptr cho tới write base để thay đổi các ptr cần thiết thành main arena, vùng chứa heap addr
+
+- Lúc này cho program in tiếp thì sẽ leak đc heap, từ đó tính ra địa chỉ heap chứa flag
+- Và sử dụng ptr đã điều khiển được stdout, tiếp tục ghi đè stdout từ read ptr cho tới write end để chương trình in flag
+- 1 điều lạ ở đây là khi em chỉ ghi tới write ptr thôi thì NOASLR vẫn in flag như thg nhưng pie on thì ko ra
+- Nên là em rút kinh nghiệm là đôi khi có những trường hợp cần ghi đè thêm các ptr khác có liên quan để chương trình thực sự in flag lúc chạy thực tế, nhất là pie on
