@@ -1,5 +1,8 @@
 # write-up-task-1
 
+## pwninit newest
+https://github.com/robbert1978/alt-pwninit
+
 ## glibc download
 -glib all in one: https://github.com/matrix1001/glibc-all-in-one
 
