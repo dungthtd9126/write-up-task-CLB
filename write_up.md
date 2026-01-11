@@ -55,8 +55,8 @@
 - Giống như arbitrary read, em cũng cần phải thỏa mãn các điều kiện trên để thực hiện phương pháp này
 - Và đồng thời khi em thỏa mãn các điều kiện trên thì các ptr khác như thế nào cx đc
 
-<img width="1319" height="200" alt="image" src="https://github.com/user-attachments/assets/ec28fdc5-1a97-4545-8e35-af7f9be61692" />
-<img width="1252" height="149" alt="image" src="https://github.com/user-attachments/assets/13605cb0-d404-4347-9fff-8bfb5ed5e1b3" />
+<img width="1319" height="500" alt="image" src="https://github.com/user-attachments/assets/ec28fdc5-1a97-4545-8e35-af7f9be61692" />
+<img width="1252" height="549" alt="image" src="https://github.com/user-attachments/assets/13605cb0-d404-4347-9fff-8bfb5ed5e1b3" />
 
 - Và như hình 1 thì cần phải chú ý read end = write_base
 - Tiếp theo thì chỉ cần quan tâm mỗi write base với write ptr là đc
@@ -168,3 +168,4 @@
 - Và sử dụng ptr đã điều khiển được stdout, tiếp tục ghi đè stdout từ read ptr cho tới write end để chương trình in flag
 - 1 điều lạ ở đây là khi em chỉ ghi tới write ptr thôi thì NOASLR vẫn in flag như thg nhưng pie on thì ko ra
 - Nên là em rút kinh nghiệm là đôi khi có những trường hợp cần ghi đè thêm các ptr khác có liên quan để chương trình thực sự in flag lúc chạy thực tế, nhất là pie on
+
