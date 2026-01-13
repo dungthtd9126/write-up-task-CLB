@@ -1,5 +1,15 @@
 # write-up-task-1
 
+## document
+- Tài liệu mà em tham khảo chủ yếu là pwn college, em sẽ lưu ở dây để tiện các lần sau nếu em cần xem lại wu
+
+- https://docs.google.com/presentation/d/1Rs04LzYjD4eQ4_TJZCMDJMS8UNcpQ_OXcBpxzKpanC4/edit?slide=id.g205983036a9_0_28#slide=id.g205983036a9_0_28
+
+- https://pwn.college/software-exploitation/file-struct-exploits
+
+- Kĩ thuật nâng cao hơn về fsop:
++ https://blog.kylebot.net/2022/10/22/angry-FSROP/#PC2ROP
+
 ## glibc download
 -glib all in one: https://github.com/matrix1001/glibc-all-in-one
 
@@ -87,14 +97,6 @@
 - Nhưng mà đáng tiếc là các bản libc mới thì nó sẽ có cơ chế check vtable có hợp lệ hay ko
 - Do đó sẽ phải thực hiện thêm vài bước để thực sự nhảy vô đc fake vtable
 - Nhưng mà kiến thức này khá sâu và xa nên em tạm bỏ qua, chừng nào gặp thì em sẽ đào thêm
-- Tài liệu mà em tham khảo chủ yếu là pwn college, em sẽ lưu ở dây để tiện các lần sau nếu em cần xem lại wu
-
-- https://docs.google.com/presentation/d/1Rs04LzYjD4eQ4_TJZCMDJMS8UNcpQ_OXcBpxzKpanC4/edit?slide=id.g205983036a9_0_28#slide=id.g205983036a9_0_28
-
-- https://pwn.college/software-exploitation/file-struct-exploits
-
-- Kĩ thuật nâng cao hơn về fsop:
-+ https://blog.kylebot.net/2022/10/22/angry-FSROP/#PC2ROP
 
 ## Solve chall
 
@@ -168,4 +170,5 @@
 - Và sử dụng ptr đã điều khiển được stdout, tiếp tục ghi đè stdout từ read ptr cho tới write end để chương trình in flag
 - 1 điều lạ ở đây là khi em chỉ ghi tới write ptr thôi thì NOASLR vẫn in flag như thg nhưng pie on thì ko ra
 - Nên là em rút kinh nghiệm là đôi khi có những trường hợp cần ghi đè thêm các ptr khác có liên quan để chương trình thực sự in flag lúc chạy thực tế, nhất là pie on
+
 
