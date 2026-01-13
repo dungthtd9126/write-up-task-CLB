@@ -1,4 +1,9 @@
 # Write up task 2 CLB
+
+## source glibc 2.31
+
+- https://elixir.bootlin.com/glibc/glibc-2.31/source/libio/libioP.h#L935
+
 ## Document
 
 - https://github.com/un1c0rn-the-pwnie/FSOPAgain
