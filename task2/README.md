@@ -10,7 +10,7 @@
 ![image](https://hackmd.io/_uploads/BJPRLAmS-e.png)
 - File plus has a new ptr called vtable pointer
 - From what i know, the program usually use vtable to set up internal to make IO logic almost the same with diffrent function. May be this part exist for efficiency reason
-- Back to exploit, the program will cal l'rax+0x38' at some  point
+- Back to exploit, the program will call 'rax+0x38' at some  point
 ![image](https://hackmd.io/_uploads/ryuS7k4BZe.png)
 - In this case, im analyzing fwrite function
 - So it will call xsputn at this part
