@@ -43,7 +43,11 @@
 - It will then call 'heap_addr + 0x38'
 - Ill use this gadget to call one gadget by writing the address of one gadget in 'heap_addr + 0x38' 
 - After it call 'heap_addr + 0x38', ill get shell from here
-## Bonus
-- I just changed from ubuntu to arch and got some problem with brute force step
-- The problem is the 4 bit brute force 
 ![image](https://hackmd.io/_uploads/Skp091VBZg.png)
+
+## Bonus
+- I just changed from ubuntu to arch and just see that NOASLR in arch may result in a differ of the 4 bit in NOASLR mode
+- For example:
+          - Arch: 0xb0c0
+          - Ubuntu: 0xa0c0
+- As you can see, i brute force the 4 bit '0xb' or '0xa' in this chall, so it doesnt matter if in NOASLR mode on arch that give different bit. It still ok as im brute forcing, not a absolute address so it still true, we just cant use NOASLR on arch to auto get shell for test like on ubuntu  
