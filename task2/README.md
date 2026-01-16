@@ -43,6 +43,7 @@
 - It will then call 'heap_addr + 0x38'
 - Ill use this gadget to call one gadget by writing the address of one gadget in 'heap_addr + 0x38' 
 - After it call 'heap_addr + 0x38', ill get shell from here
+
 ![image](https://hackmd.io/_uploads/Skp091VBZg.png)
 
 ## Bonus
