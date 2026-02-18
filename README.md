@@ -5,5 +5,5 @@
 
 - https://repository.root-me.org/Exploitation%20-%20Syst%C3%A8me/EN%20-%20Play%20with%20FILE%20Structure%20-%20Yet%20Another%20Binary%20Exploit%20Technique%20-%20An-Jie%20Yang.pdf
 
-## FSOP using ld
+## Return to dlresolves
 - https://syst3mfailure.io/ret2dl_resolve/
