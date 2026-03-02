@@ -1,4 +1,4 @@
-<img width="1920" height="1028" alt="image" src="https://github.com/user-attachments/assets/c9ad05db-6c79-4ede-9b5e-9601d3a18603" /># Task 5
+# Task 5
 
 ## Document: ret2dl_resolve
 
