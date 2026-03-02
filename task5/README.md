@@ -53,6 +53,7 @@
 
 - So when fake JMPREL and SYMTAB, i should have 0x18 alignment
 
-- The next thing is
+### How the program works
 
+- This technique base on a mechanism of dynamic linking. When I first calls a libc function, it goes to a function stub, pushing <b>'reloc_arg'</b>
 
