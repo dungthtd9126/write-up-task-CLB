@@ -82,4 +82,4 @@ void *const rel_addr = (void *)(l->l_addr + reloc->r_offset);
 
 - The second line stores our chosen symtab into sym: *sym = &symtab[reloc->r_info >> 32];
 
-- 
+  
