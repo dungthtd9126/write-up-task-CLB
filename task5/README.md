@@ -100,6 +100,31 @@ assert (ELFW(R_TYPE)(reloc->r_info) == ELF_MACHINE_JMP_SLOT);
 - Not only that, I need to fake reloc_arg too:
   - <b> (fake_rel  - JMPREL) / 0x18 </b>
 
-- Note that both fake_rel and fake_symtab should be 0x18 aligned to get valid value
+- Note that both fake_rel and fake_symtab should be 0x18 aligned to get integer type value
 
-- 
+## Exploit
+
+- Back to the challenge, I'll first write <b> /bin/sh </b> and <b> system </b> string in bss
+
+--> rop chain, making rdi stores ptr to /bin/sh string -->  execute default function stub
+
+<img width="961" height="728" alt="image" src="https://github.com/user-attachments/assets/93722abe-e503-4f60-9796-499c41ab9a12" />
+
+- From the picture above, reloc_arg should be set up right after a libc address just gets pushed on the stack by the program
+
+- Note that we need to align our fake symtab and jmprel with 0x18
+
+<img width="913" height="192" alt="image" src="https://github.com/user-attachments/assets/ac28c029-f4e0-4577-b87c-f63c836c72ee" />
+
+- In reality, jmprel struct only uses 0x10 bytes, 8 bytes left are padded
+
+- So we can use 8 bytes left as our fake symtab too if it is a valid aligned address
+
+<img width="913" height="192" alt="image" src="https://github.com/user-attachments/assets/051a72fa-e7bb-463a-9d47-5d8f1ece10ff" />
+
+- With this action, we need much less bytes to write --> avoid not enough input num
+
+- I uses this trick in the picture above so it was perfectly fit in this challenge
+
+- Because the program executes that functon after resolved so I'll succesfully get shell in here without libc leak
+
