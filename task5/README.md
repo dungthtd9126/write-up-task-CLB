@@ -72,4 +72,14 @@ const ElfW(Sym) *sym = &symtab[ELFW(R_SYM) (reloc->r_info)];
 const ElfW(Sym) *refsym = sym;
 void *const rel_addr = (void *)(l->l_addr + reloc->r_offset);
 ```
-- Those parts above are in _dl_fixup function, 
+- Those parts above are in _dl_fixup function
+- The first line:
+  - <b>reloc_offset</b> corresponds to reloc_arg * sizeof(PLTREL) = reloc_arg * 0x18
+  
+  - D_PTR(l, l_info[DT_JMPREL]) = JMPREL address
+
+- So the first line means: reloc = JMPREL + reloc_arg * 0x18. It stores our chosen REL struct to reloc
+
+- The second line stores our chosen symtab into sym: *sym = &symtab[reloc->r_info >> 32];
+
+- 
