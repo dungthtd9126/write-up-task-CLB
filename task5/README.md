@@ -32,7 +32,10 @@
 
 <img width="640" height="249" alt="image" src="https://github.com/user-attachments/assets/7f219d3f-eb1d-4b98-9f61-c94846bf78d2" />
 
-### How to get JMP, STRTAB, SYMTAB base
+<details>
+  
+<summary>How to get JMP, STRTAB, SYMTAB base</summary>
+
 - command on terminal: readelf -S ./chall_patched
 
 <img width="741" height="854" alt="image" src="https://github.com/user-attachments/assets/aad02304-dd5d-429a-854d-57b3f7e67e19" />
@@ -44,13 +47,12 @@
   + SYMTAB: .dynsym
   + STRTAB: .dynstr
 
+</details>
+
 - Another important information is both JMPREL and SYMTAB are usually 0x18 in size
 
 - So when fake JMPREL and SYMTAB, i should have 0x18 alignment
 
 - The next thing is
 
-<details>
-<summary>Click to view the GDB backtrace</summary>
-[Stack dump here]
-</details>
+
