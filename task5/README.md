@@ -12,6 +12,16 @@
 
 - This technique requires 3 me to fake 3 main parts: Rel struct, symtab (dynsym) struct, and strtab (dynstr)
 
-  - Rel struct has 2 main parts: r_offset, r_info
- 
+  - Rel struct contains 2 main parts: r_offset, r_info
+  
   <img width="1360" height="189" alt="image" src="https://github.com/user-attachments/assets/6e587dde-54d7-4e9b-9422-2186df008e90" />
+
+  - Each part has 8 bytes length
+
+- Symtab has 6 components:
+  + st_name: It acts as a string table index. It will be used to locate the right string in the STRTAB section.
+  + st_info: It contains symbol’s type and binding attributes.
+  + st_other: It contains symbol’s visibility.
+  + st_shndx: It contains the relevant section header table index.
+  + st_value: It contains the value of the associated symbol.
+  + st_size: It contains the symbol’s size. If the symbol has no size or the size is unknown, it contains 0.
