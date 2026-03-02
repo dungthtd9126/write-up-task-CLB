@@ -48,3 +48,9 @@
 
 - So when fake JMPREL and SYMTAB, i should have 0x18 alignment
 
+- The next thing is
+
+<details>
+<summary>Click to view the GDB backtrace</summary>
+[Stack dump here]
+</details>
