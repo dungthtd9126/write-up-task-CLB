@@ -1,4 +1,4 @@
-# Task 5
+<img width="1920" height="1028" alt="image" src="https://github.com/user-attachments/assets/c9ad05db-6c79-4ede-9b5e-9601d3a18603" /># Task 5
 
 ## Document: ret2dl_resolve
 
@@ -55,5 +55,17 @@
 
 ### How the program works
 
-- This technique base on a mechanism of dynamic linking. When I first calls a libc function, it goes to a function stub, pushing <b>'reloc_arg'</b>
+- This technique base on a mechanism of dynamic linking. When I first calls a libc function, it goes to a function stub stored as default inside the symbol's got.plt --> pushing <b>reloc_arg</b> then execute _dl_runtime_resolve() to find the true address in libc.
 
+- After succesfully found the symbol with its libc address, it stores the real libc addr into that symbol's got.plt and execute that function
+
+- Because PIE is off and saved rip can be overwrote, I can fake strtab, symtab, jmprel, reloc_arg and rop chain to force it call system(/bin/sh)
+
+## Analyze libc
+
+```c
+const PLTREL *const reloc = (const void *) (D_PTR(l, l_info[DT_JMPREL]) + reloc_offset);
+const ElfW(Sym) *sym = &symtab[ELFW(R_SYM) (reloc->r_info)];
+const ElfW(Sym) *refsym = sym;
+void *const rel_addr = (void *)(l->l_addr + reloc->r_offset);
+```
