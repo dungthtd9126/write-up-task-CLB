@@ -63,9 +63,13 @@
 
 ## Analyze libc
 
+- I'll analyze only neccessary parts in my exploit so some parts may be skipped
+
+<b> Source: https://codebrowser.dev/glibc/glibc/elf/dl-runtime.c.html#_dl_fixup </b>
 ```c
 const PLTREL *const reloc = (const void *) (D_PTR(l, l_info[DT_JMPREL]) + reloc_offset);
 const ElfW(Sym) *sym = &symtab[ELFW(R_SYM) (reloc->r_info)];
 const ElfW(Sym) *refsym = sym;
 void *const rel_addr = (void *)(l->l_addr + reloc->r_offset);
 ```
+- Those parts above are in _dl_fixup function, 
