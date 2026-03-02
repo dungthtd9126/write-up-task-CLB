@@ -69,8 +69,7 @@
 ```c
 const PLTREL *const reloc = (const void *) (D_PTR(l, l_info[DT_JMPREL]) + reloc_offset);
 const ElfW(Sym) *sym = &symtab[ELFW(R_SYM) (reloc->r_info)];
-const ElfW(Sym) *refsym = sym;
-void *const rel_addr = (void *)(l->l_addr + reloc->r_offset);
+
 ```
 - Those parts above are in _dl_fixup function
 - The first line:
@@ -80,6 +79,27 @@ void *const rel_addr = (void *)(l->l_addr + reloc->r_offset);
 
 - So the first line means: reloc = JMPREL + reloc_arg * 0x18. It stores our chosen REL struct to reloc
 
-- The second line stores our chosen symtab into sym: *sym = &symtab[reloc->r_info >> 32];
+- The last line stores our chosen symtab into sym: *sym = &symtab[reloc->r_info >> 32];
 
-  
+- After that, there will be a check:
+```c
+assert (ELFW(R_TYPE)(reloc->r_info) == ELF_MACHINE_JMP_SLOT);
+```
+- Meaning: assert ((reloc->r_info & 0xffffffff) == 0x7); 
+
+- It check if <b> (reloc->r_info & 0xffffffff) == 0x7 </b> to confirm if that is a valid JUMP_SLOT.
+
+- From what we can see:
+    - *sym = &symtab[reloc->r_info >> 32];
+    - assert ((reloc->r_info & 0xffffffff) == 0x7);
+      
+- We can bypass these by set our fake r_info like below:
+
+  + <b> r_info = (int((fake_symtab - SYMTAB) / 0x18)  << 32) | 0x7 </b>
+
+- Not only that, I need to fake reloc_arg too:
+  - <b> (fake_rel  - JMPREL) / 0x18 </b>
+
+- Note that both fake_rel and fake_symtab should be 0x18 aligned to get valid value
+
+- 
