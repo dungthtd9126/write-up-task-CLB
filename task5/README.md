@@ -37,4 +37,14 @@
 
 <img width="741" height="854" alt="image" src="https://github.com/user-attachments/assets/aad02304-dd5d-429a-854d-57b3f7e67e19" />
 
-- 
+- It will show a list of section headers with following atributes
+
+- I'll get JMPREL, TRTAB, SYMTAB base in the following secton:
+  + JMPREL: .rela.plt
+  + SYMTAB: .dynsym
+  + STRTAB: .dynstr
+
+- Another important information is both JMPREL and SYMTAB are usually 0x18 in size
+
+- So when fake JMPREL and SYMTAB, i should have 0x18 alignment
+
