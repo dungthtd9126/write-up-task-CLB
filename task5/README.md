@@ -128,3 +128,6 @@ assert (ELFW(R_TYPE)(reloc->r_info) == ELF_MACHINE_JMP_SLOT);
 
 - Because the program executes that functon after resolved so I'll succesfully get shell in here without libc leak
 
+- Last note that '/bin/sh' and 'system' string addresses should be bigger than rsp when the program starting to resolve the symbol
+
+- If not, it value may be replaced by stack frames of _dl_runtime_resolve() and its sub function, leading to unexpectable scenarios
