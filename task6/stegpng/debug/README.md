@@ -4,7 +4,7 @@
 
 ## How the challenge works
 
-This challenge is completely different with others which I've solved.
+This challenge is completely different from others which I've solved.
 
 The challenge's name is steghide, it is a tool to extract hidden messages inside an image when enter correct passphrase.
 
@@ -121,7 +121,7 @@ Stripped:   No
 ### Reverse shell
 As usual, We use execve(/bin/sh, 0, 0) to get normal shell. But in this challenge, it is a bit different. The challenge acts as a virtual web. It only receive our upload file then <b> read </b> it in <b> sub-process </b>
 
-In other words, we just upload our virus file on the server and <b> leave instantly </b>. The server reads it alone without interact with us (only gives the result). So if I use the normal method, I'll fail to win
+In other words, we just upload our payload file on the server and <b> leave instantly </b>. The server reads it alone without interact with us (only gives the result). So if I use the normal method, I'll fail to win
 
 The best method is using reverse shell:
 - Make the server's sub-process connects and gives shell in my local host server by its choice (controlled by us)
@@ -163,7 +163,7 @@ inet 172.17.0.1/16 brd ...
 ```
 If your target is the event's server, do the same with <b> wlp2s0 </b> section, that is your real internet IP
 
-Now go to web server to send our virus file and win!!
+Now go to web server to send our evil file and win!!
 
 <img width="1297" height="269" alt="image" src="https://github.com/user-attachments/assets/833ba54e-056d-486e-8273-4ea9c86b19c0" />
 
