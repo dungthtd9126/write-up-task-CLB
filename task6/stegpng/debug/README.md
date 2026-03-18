@@ -1,10 +1,10 @@
 # Task 6
 
-<h4> This challenge gives 2 binary <b> steghide (has bug)</b> and <b> steghide_patched (no bug)</b> and a dockerfile with some set up directories for docker build <h4>
+<h4> This challenge provides 2 binaries <b> steghide (vulnerable)</b> and <b> steghide_patched (fixed)</b> and a dockerfile with some set up directories for docker build <h4>
 
 ## How the challenge works
 
-This challenge is completely different with other challenges which I had solved.
+This challenge is completely different with others which I've solved.
 
 The challenge's name is steghide, it is a tool to extract hidden messages inside an image when enter correct passphrase.
 
