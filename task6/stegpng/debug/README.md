@@ -14,7 +14,7 @@ You can see exactly how it works when you builds a docker. The server will act a
 steghide extract -sf 'our_image' -p 'our_passphrase' -xf outfile_name
 ```
 
---> So the bug definitely exist in this comamnd
+--> So the bug definitely exist in this command
 
 ## How to find the bugs 
 We have already known what command-line triggers the bug , so the next thing is what function has bugs.
