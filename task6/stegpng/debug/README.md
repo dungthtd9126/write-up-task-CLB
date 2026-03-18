@@ -4,7 +4,7 @@
 
 ## How the challenge works
 
-This challenge is completely different with other challenges which I solved.
+This challenge is completely different with other challenges which I had solved.
 
 The challenge's name is steghide, it is a tool to extract hidden messages inside an image when enter correct passphrase.
 
