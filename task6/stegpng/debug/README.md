@@ -36,15 +36,16 @@ In my case, /path/to/diaphora_file = <b> /home/saitomu/diaphora </b>
 
 - First binary: just click <b> ok </b> --> get SQLite file
 
-![alt text](image-3.png)
+<img width="945" height="165" alt="image" src="https://github.com/user-attachments/assets/036cc7ed-85d7-4ca1-ab25-f99ca08d7474" />
 
 - Second binary: Choose <b> steghide.sqlite </b> then click <b> ok </b>
 
-![alt text](image-2.png)
+<img width="935" height="168" alt="image" src="https://github.com/user-attachments/assets/c308d964-6dce-405f-a235-db31e88ddce7" />
 
 - After that, focus on <b> partial matches </b> tab
 
-![alt text](image-4.png)
+<img width="1544" height="102" alt="image" src="https://github.com/user-attachments/assets/5daa8bb8-cfb8-4042-a421-7bf07a81765d" />
+
 <p>
 Partial matches tab appear when there are small differences between 2 binary, meaning the author just changes some line of codes
 
