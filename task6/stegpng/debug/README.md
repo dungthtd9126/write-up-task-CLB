@@ -162,3 +162,9 @@ Because my target is my own docker so I can just find <b>docker0 </b> section an
 inet 172.17.0.1/16 brd ...
 ```
 If your target is the event's server, do the same with <b> wlp2s0 </b> section, that is your real internet IP
+
+Now go to web server to send our virus file and win!!
+
+<img width="1297" height="269" alt="image" src="https://github.com/user-attachments/assets/833ba54e-056d-486e-8273-4ea9c86b19c0" />
+
+<img width="853" height="616" alt="image" src="https://github.com/user-attachments/assets/c1e72aa9-ce90-4f3b-a753-5cf7ae1eea55" />
