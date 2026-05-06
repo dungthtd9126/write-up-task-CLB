@@ -1,4 +1,13 @@
 # Write up task 2 CLB
+
+## How fsop with wfile_overflow jump
+
+```
+rax is wide data
+<_IO_wdoallocbuf+45>    mov    rax, qword ptr [rax + 0xe0]     RAX, [0x55555555b4b0] => 0
+<_IO_wdoallocbuf+52>    call   qword ptr [rax + 0x68]
+```
+
 ## Document
 
 - https://github.com/un1c0rn-the-pwnie/FSOPAgain
