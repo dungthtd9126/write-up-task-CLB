@@ -32,7 +32,6 @@
 
 <img width="640" height="249" alt="image" src="https://github.com/user-attachments/assets/7f219d3f-eb1d-4b98-9f61-c94846bf78d2" />
 
-<details>
   
 ## How to get JMP, STRTAB, SYMTAB base
 
@@ -47,7 +46,6 @@
   + SYMTAB: .dynsym
   + STRTAB: .dynstr
 
-</details>
 
 - Another important information is both JMPREL and SYMTAB are usually 0x18 in size
 
