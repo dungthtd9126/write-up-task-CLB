@@ -34,7 +34,7 @@
 
 <details>
   
-<summary> <b>  How to get JMP, STRTAB, SYMTAB base </b></summary>
+## How to get JMP, STRTAB, SYMTAB base
 
 - command on terminal: readelf -d  ./chall_name 
 
