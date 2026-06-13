@@ -39,6 +39,11 @@
 
 <img width="922" height="718" alt="image" src="https://github.com/user-attachments/assets/3a3c1842-dcc1-4432-b8d7-555eafccc021" />
 
+And readelf -S ./unexploitable:
+
+<img width="973" height="963" alt="image" src="https://github.com/user-attachments/assets/3a7ab62c-05db-4bd1-89b3-6b58b14ca6fc" />
+
+
 - It will show a list of section headers with following atributes
 
 - I'll get JMPREL, TRTAB, SYMTAB base in the following secton:
