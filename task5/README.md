@@ -90,9 +90,10 @@ assert (ELFW(R_TYPE)(reloc->r_info) == ELF_MACHINE_JMP_SLOT);
 - It check if <b> (reloc->r_info & 0xffffffff) == 0x7 </b> to confirm if that is a valid JUMP_SLOT.
 
 - From what we can see:
-    - *sym = &symtab[reloc->r_info >> 32];
-    - assert ((reloc->r_info & 0xffffffff) == 0x7);
-      
+    ```
+     *sym = &symtab[reloc->r_info >> 32];
+     assert ((reloc->r_info & 0xffffffff) == 0x7);
+    ```
 - We can bypass these by set our fake r_info like below:
 
   + <b> r_info = (int((fake_symtab - SYMTAB) / 0x18)  << 32) | 0x7 </b>
