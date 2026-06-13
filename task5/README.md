@@ -38,7 +38,7 @@
 
 - command on terminal: readelf -d  ./chall_name 
 
-<img width="741" height="854" alt="image" src="https://github.com/user-attachments/assets/aad02304-dd5d-429a-854d-57b3f7e67e19" />
+<img width="922" height="718" alt="image" src="https://github.com/user-attachments/assets/3a3c1842-dcc1-4432-b8d7-555eafccc021" />
 
 - It will show a list of section headers with following atributes
 
