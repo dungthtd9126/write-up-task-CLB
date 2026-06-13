@@ -36,7 +36,7 @@
   
 <summary> <b>  How to get JMP, STRTAB, SYMTAB base </b></summary>
 
-- command on terminal: readelf -S ./chall_patched
+- command on terminal: readelf -d  ./chall_name 
 
 <img width="741" height="854" alt="image" src="https://github.com/user-attachments/assets/aad02304-dd5d-429a-854d-57b3f7e67e19" />
 
